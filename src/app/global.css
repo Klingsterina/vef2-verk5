@@ -18,18 +18,6 @@
   --color-background-accent: #f4cf58;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text-1: #ffffff;
-    --color-text-2: #eeeeee;
-    --color-background-1: #000000;
-    --color-background-2: #111111;
-    --color-background-3: #373737;
-    --color-accent: #ffa691;
-    --color-background-accent: #1f775e;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
