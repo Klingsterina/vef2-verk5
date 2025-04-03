@@ -2,6 +2,7 @@ import { executeQuery } from '@/lib/datocms/executeQuery';
 import { graphql } from '@/lib/datocms/graphql';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { StructuredText } from 'react-datocms';
 
 const categoryQuery = graphql(
   `
@@ -21,6 +22,9 @@ const questionsQuery = graphql(
       allQuestions(filter: { flokkur: { eq: $id } }) {
         id
         questionTitle
+        body {
+          value
+        }
         authors {
           name
         }
@@ -39,6 +43,7 @@ type Props = {
 type Question = {
   id: string;
   questionTitle: string;
+  body: {value: any};
   authors: { name: string }[];
 };
 
@@ -63,12 +68,15 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      <h1>Spurningar í flokki: {questioncategory.title}</h1>
+      <h1>Fréttir í flokki: {questioncategory.title}</h1>
       <ul>
         {allQuestions.map((q) => (
           <li key={q.id}>
             <Link href={`/questions/${q.id}`}>{q.questionTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
+            <div>
+              <StructuredText data={q.body}/>
+            </div>
           </li>
         ))}
       </ul>
