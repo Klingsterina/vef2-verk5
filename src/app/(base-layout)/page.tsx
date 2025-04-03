@@ -6,13 +6,15 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const query = graphql(
-  `query Categories {
-    allQuestioncategories {
-      title
-      slug
+  `
+    query Categories {
+      allQuestioncategories {
+        title
+        slug
+      }
     }
-  }`,
-  []
+  `,
+  [],
 );
 
 type QuestionCategory = {

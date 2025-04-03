@@ -25,7 +25,7 @@
 // export default async function QuestionsPage() {
 
 //   const { allQuestions } = await executeQuery(query, {});
-  
+
 //     if (!allQuestions) {
 //       notFound();
 //     }
@@ -49,4 +49,3 @@
 // function localNotFound() {
 //   throw new Error('Function not implemented.');
 // }
-
