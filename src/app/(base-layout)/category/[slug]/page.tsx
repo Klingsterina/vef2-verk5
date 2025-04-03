@@ -43,7 +43,7 @@ type Props = {
 type Question = {
   id: string;
   questionTitle: string;
-  body: {value: any};
+  body: { value: any };
   authors: { name: string }[];
 };
 
@@ -75,7 +75,7 @@ export default async function CategoryPage({ params }: Props) {
             <Link href={`/questions/${q.id}`}>{q.questionTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
             <div>
-              <StructuredText data={q.body}/>
+              <StructuredText data={q.body} />
             </div>
           </li>
         ))}
