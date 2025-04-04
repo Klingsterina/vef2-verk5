@@ -64,7 +64,8 @@ type Article = {
     title: string;
   } | null;
   authors: {
-    picture: { url: string; }; name: string
+    picture: { url: string };
+    name: string;
   }[];
   _createdAt: string;
 };
@@ -96,11 +97,12 @@ export default async function CategoryPage({ params }: Props) {
       <ul>
         {allArticles.map((q) => (
           <li key={q.id} className={styles.article}>
-            <h2 style={{fontSize: '3rem'}}>{q.articleTitle}</h2>
+            <h2 style={{ fontSize: '3rem' }}>{q.articleTitle}</h2>
             <div className={styles.articleContent}>
               {q.picture && (
                 <Link href={`/article/${q.id}`}>
-                  <img className={styles.articleImage}
+                  <img
+                    className={styles.articleImage}
                     src={q.picture.url}
                     alt={q.picture.alt || ''}
                   />
@@ -117,7 +119,9 @@ export default async function CategoryPage({ params }: Props) {
                 </p>
               </div>
             </div>
-            <p style={{fontSize: '1.5rem', fontWeight: 'bold'}}>Höfund{q.authors.length > 1 ? 'ar' : 'ur'}:</p>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              Höfund{q.authors.length > 1 ? 'ar' : 'ur'}:
+            </p>
             <div className={styles.authorContainer}>
               {q.authors && q.authors.length > 0 ? (
                 q.authors.map((author, i) => (

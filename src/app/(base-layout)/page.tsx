@@ -39,7 +39,8 @@ type Article = {
     title: string;
   } | null;
   authors: {
-    picture: { url: string; }; name: string 
+    picture: { url: string };
+    name: string;
   }[];
   _createdAt: string;
 };
@@ -55,17 +56,18 @@ export default async function HomePage() {
       <ul>
         {allArticles.map((article) => (
           <li key={article.id} className={styles.article}>
-            <h2 style={{fontSize: '3rem'}}>
+            <h2 style={{ fontSize: '3rem' }}>
               <Link href={`/article/${article.id}`}>{article.articleTitle}</Link>
             </h2>
             <div className={styles.articleContent}>
               {article.picture && (
                 <Link href={`/article/${article.id}`}>
-                <img className={styles.articleImage}
-                  src={article.picture.url}
-                  alt={article.picture.alt || ''}
-                />
-              </Link>
+                  <img
+                    className={styles.articleImage}
+                    src={article.picture.url}
+                    alt={article.picture.alt || ''}
+                  />
+                </Link>
               )}
               <div className={styles.articleText}>
                 <p>{article.headline}</p>
@@ -78,7 +80,9 @@ export default async function HomePage() {
                 </p>
               </div>
             </div>
-            <p style={{fontSize: '1.5rem', fontWeight: 'bold'}}>Höfund{article.authors.length > 1 ? 'ar' : 'ur'}:</p>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              Höfund{article.authors.length > 1 ? 'ar' : 'ur'}:
+            </p>
             <div className={styles.authorContainer}>
               {article.authors && article.authors.length > 0 ? (
                 article.authors.map((author, i) => (
