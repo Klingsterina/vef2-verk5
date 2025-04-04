@@ -1,6 +1,8 @@
 import { graphql } from '@/lib/datocms/graphql';
 import { executeQuery } from '@/lib/datocms/executeQuery';
 import { StructuredText } from 'react-datocms';
+export const dynamic = 'force-dynamic';
+
 
 type Props = {
   params: {
@@ -66,7 +68,6 @@ export default async function Article({ params }: Props) {
         <img
           src={article.picture.url}
           alt={article.picture.alt || ''}
-          style={{ maxWidth: '300px', marginTop: '10px' }}
         />
       )}
 

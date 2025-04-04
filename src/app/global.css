@@ -1,4 +1,4 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.css')
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.css')
   screen and (prefers-color-scheme: dark);
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.css') screen
@@ -16,11 +16,6 @@
   --color-background-3: #e5e7eb;
   --color-accent: #d9450c;
   --color-background-accent: #f4cf58;
-}
-
-* {
-  margin: 0;
-  padding: 0;
 }
 
 blockquote,
@@ -303,4 +298,4 @@ button {
   &:focus {
     opacity: 0.8;
   }
-}
+} */

@@ -1,3 +1,248 @@
+type AltFileField implements FileFieldInterface {
+  _createdAt: DateTime!
+
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
+  _editingUrl: String
+  _updatedAt: DateTime!
+  alt(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String!
+  author: String
+  basename: String!
+  blurUpThumb(
+    """
+    Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
+    """
+    punch: Float! = 1
+
+    """Maximum image dimension (defaults to 24px)"""
+    size: Int! = 24
+
+    """Image quality (defaults to 70%)"""
+    quality: Int! = 70
+
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String
+  blurhash: String
+  colors: [ColorField!]!
+  copyright: String
+  customData(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): CustomData!
+  exifInfo: CustomData!
+  filename: String!
+  focalPoint(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): focalPoint
+  format: String!
+  height: IntType
+  id: UploadId!
+  md5: String!
+  mimeType: String!
+  notes: String
+  responsiveImage(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+
+    """Specify a custom `sizes` attribute for the image"""
+    sizes: String
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): ResponsiveImage
+  size: IntType!
+  smartTags: [String!]!
+  tags: [String!]!
+  thumbhash: String
+  title(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String
+  url(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String!
+  video: UploadVideoField
+  width: IntType
+}
+
+type ArticleModelBodyField {
+  blocks: [ImageBlockRecord!]!
+  inlineBlocks: [String!]!
+  links: [String!]!
+  value: JsonField!
+}
+
+input ArticleModelFilter {
+  _createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  articleTitle: StringFilter
+  authors: LinksFilter
+  body: StructuredTextFilter
+  flokkur: LinkFilter
+  headline: TextFilter
+  picture: FileFilter
+  OR: [ArticleModelFilter]
+  AND: [ArticleModelFilter]
+}
+
+enum ArticleModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  articleTitle_ASC
+  articleTitle_DESC
+}
+
+"""Record of type Article (article)"""
+type ArticleRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  articleTitle: String!
+  authors: [AuthorRecord!]!
+  body: ArticleModelBodyField!
+  flokkur: ArticlecategoryRecord!
+  headline(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  id: ItemId!
+  picture: AltFileField!
+}
+
+input ArticlecategoryModelFilter {
+  _createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  slug: SlugFilter
+  title: StringFilter
+  OR: [ArticlecategoryModelFilter]
+  AND: [ArticlecategoryModelFilter]
+}
+
+enum ArticlecategoryModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  title_ASC
+  title_DESC
+}
+
+"""Record of type ArticleCategory (articlecategory)"""
+type ArticlecategoryRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  slug: String!
+  title: String!
+}
+
 input AuthorModelFilter {
   _createdAt: CreatedAtFilter
   id: ItemIdFilter
@@ -57,7 +302,7 @@ type AuthorRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  favoriteQuestioncategory: QuestioncategoryRecord
+  favoriteQuestioncategory: ArticlecategoryRecord
   id: ItemId!
   name: String
 }
@@ -344,6 +589,30 @@ interface FileFieldInterface {
   ): String!
   video: UploadVideoField
   width: IntType
+}
+
+"""Specifies how to filter Single-file/image fields"""
+input FileFilter {
+  """
+  Search for records with an exact match. The specified value must be an Upload ID
+  """
+  eq: UploadId
+
+  """
+  Exclude records with an exact match. The specified value must be an Upload ID
+  """
+  neq: UploadId
+
+  """Filter records that have one of the specified uploads"""
+  in: [UploadId]
+
+  """Filter records that do not have one of the specified uploads"""
+  notIn: [UploadId]
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
 }
 
 """
@@ -2638,8 +2907,6 @@ type PageRecord implements RecordInterface {
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
   id: ItemId!
-  seoAnalysis: JsonField
-  seoSettingsSocial: SeoField
   structuredText: PageModelStructuredTextField!
   title: String!
 }
@@ -2685,24 +2952,24 @@ input PublishedAtFilter {
 """The query root for this schema"""
 type Query {
   """Returns meta information regarding a record collection"""
+  _allArticlecategoriesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: ArticlecategoryModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
+  _allArticlesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: ArticleModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
   _allAuthorsMeta(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
     filter: AuthorModelFilter
-  ): CollectionMetadata!
-
-  """Returns meta information regarding a record collection"""
-  _allQuestioncategoriesMeta(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    filter: QuestioncategoryModelFilter
-  ): CollectionMetadata!
-
-  """Returns meta information regarding a record collection"""
-  _allQuestionsMeta(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    filter: QuestionModelFilter
   ): CollectionMetadata!
 
   """Returns meta information regarding an assets collection"""
@@ -2724,6 +2991,44 @@ type Query {
   ): Site!
 
   """Returns a collection of records"""
+  allArticlecategories(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: ArticlecategoryModelFilter
+    orderBy: [ArticlecategoryModelOrderBy] = [_updatedAt_DESC]
+  ): [ArticlecategoryRecord!]!
+
+  """Returns a collection of records"""
+  allArticles(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: ArticleModelFilter
+    orderBy: [ArticleModelOrderBy] = [_updatedAt_DESC]
+  ): [ArticleRecord!]!
+
+  """Returns a collection of records"""
   allAuthors(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2741,44 +3046,6 @@ type Query {
     filter: AuthorModelFilter
     orderBy: [AuthorModelOrderBy] = [_updatedAt_DESC]
   ): [AuthorRecord!]!
-
-  """Returns a collection of records"""
-  allQuestioncategories(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-
-    """Skip the first results"""
-    skip: IntType
-
-    """Limit the number of results"""
-    first: IntType = 20
-    filter: QuestioncategoryModelFilter
-    orderBy: [QuestioncategoryModelOrderBy] = [_updatedAt_DESC]
-  ): [QuestioncategoryRecord!]!
-
-  """Returns a collection of records"""
-  allQuestions(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-
-    """Skip the first results"""
-    skip: IntType
-
-    """Limit the number of results"""
-    first: IntType = 20
-    filter: QuestionModelFilter
-    orderBy: [QuestionModelOrderBy] = [_updatedAt_DESC]
-  ): [QuestionRecord!]!
 
   """Returns a collection of assets"""
   allUploads(
@@ -2798,6 +3065,32 @@ type Query {
     filter: UploadFilter
     orderBy: [UploadOrderBy] = [_createdAt_DESC]
   ): [FileField!]!
+
+  """Returns a specific record"""
+  article(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ArticleModelFilter
+    orderBy: [ArticleModelOrderBy] = [_updatedAt_DESC]
+  ): ArticleRecord
+
+  """Returns a specific record"""
+  articlecategory(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ArticlecategoryModelFilter
+    orderBy: [ArticlecategoryModelOrderBy] = [_updatedAt_DESC]
+  ): ArticlecategoryRecord
 
   """Returns a specific record"""
   author(
@@ -2834,32 +3127,6 @@ type Query {
     fallbackLocales: [SiteLocale!]
   ): PageRecord
 
-  """Returns a specific record"""
-  question(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: QuestionModelFilter
-    orderBy: [QuestionModelOrderBy] = [_updatedAt_DESC]
-  ): QuestionRecord
-
-  """Returns a specific record"""
-  questioncategory(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: QuestioncategoryModelFilter
-    orderBy: [QuestioncategoryModelOrderBy] = [_updatedAt_DESC]
-  ): QuestioncategoryRecord
-
   """Returns a specific asset"""
   upload(
     """The locale to use to fetch the field's content"""
@@ -2872,141 +3139,6 @@ type Query {
     filter: UploadFilter
     orderBy: [UploadOrderBy] = [_createdAt_DESC]
   ): FileField
-}
-
-input QuestionModelFilter {
-  _createdAt: CreatedAtFilter
-  id: ItemIdFilter
-  _firstPublishedAt: PublishedAtFilter
-  _publicationScheduledAt: PublishedAtFilter
-  _unpublishingScheduledAt: PublishedAtFilter
-  _publishedAt: PublishedAtFilter
-  _status: StatusFilter
-  _updatedAt: UpdatedAtFilter
-  _isValid: BooleanFilter
-  authors: LinksFilter
-  flokkur: LinkFilter
-  questionTitle: StringFilter
-  spurning: TextFilter
-  OR: [QuestionModelFilter]
-  AND: [QuestionModelFilter]
-}
-
-enum QuestionModelOrderBy {
-  _createdAt_ASC
-  _createdAt_DESC
-  id_ASC
-  id_DESC
-  _firstPublishedAt_ASC
-  _firstPublishedAt_DESC
-  _publicationScheduledAt_ASC
-  _publicationScheduledAt_DESC
-  _unpublishingScheduledAt_ASC
-  _unpublishingScheduledAt_DESC
-  _publishedAt_ASC
-  _publishedAt_DESC
-  _status_ASC
-  _status_DESC
-  _updatedAt_ASC
-  _updatedAt_DESC
-  _isValid_ASC
-  _isValid_DESC
-  questionTitle_ASC
-  questionTitle_DESC
-}
-
-"""Record of type Question (question)"""
-type QuestionRecord implements RecordInterface {
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """Generates SEO and Social card meta tags to be used in your frontend"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  authors: [AuthorRecord!]!
-  flokkur: QuestioncategoryRecord!
-  id: ItemId!
-  questionTitle: String!
-  spurning(
-    """Process content as markdown"""
-    markdown: Boolean
-  ): String!
-}
-
-input QuestioncategoryModelFilter {
-  _createdAt: CreatedAtFilter
-  id: ItemIdFilter
-  _firstPublishedAt: PublishedAtFilter
-  _publicationScheduledAt: PublishedAtFilter
-  _unpublishingScheduledAt: PublishedAtFilter
-  _publishedAt: PublishedAtFilter
-  _status: StatusFilter
-  _updatedAt: UpdatedAtFilter
-  _isValid: BooleanFilter
-  slug: SlugFilter
-  title: StringFilter
-  OR: [QuestioncategoryModelFilter]
-  AND: [QuestioncategoryModelFilter]
-}
-
-enum QuestioncategoryModelOrderBy {
-  _createdAt_ASC
-  _createdAt_DESC
-  id_ASC
-  id_DESC
-  _firstPublishedAt_ASC
-  _firstPublishedAt_DESC
-  _publicationScheduledAt_ASC
-  _publicationScheduledAt_DESC
-  _unpublishingScheduledAt_ASC
-  _unpublishingScheduledAt_DESC
-  _publishedAt_ASC
-  _publishedAt_DESC
-  _status_ASC
-  _status_DESC
-  _updatedAt_ASC
-  _updatedAt_DESC
-  _isValid_ASC
-  _isValid_DESC
-  title_ASC
-  title_DESC
-}
-
-"""Record of type QuestionCategory (questioncategory)"""
-type QuestioncategoryRecord implements RecordInterface {
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """Generates SEO and Social card meta tags to be used in your frontend"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  id: ItemId!
-  slug: String
-  title: String!
 }
 
 interface RecordInterface {
@@ -3168,6 +3300,30 @@ input StringMatchesFilter {
   pattern: String!
   caseSensitive: BooleanType = false
   regexp: BooleanType = true
+}
+
+"""Specifies how to filter Structured Text fields values"""
+input StructuredTextFilter {
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
+
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
+
+  """
+  Filter records with the specified field set as blank (null or single empty paragraph)
+  """
+  isBlank: BooleanType
+
+  """
+  Filter records with the specified field present (neither null, nor empty string)
+  """
+  isPresent: BooleanType
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
+  """
+  exists: BooleanType
 }
 
 type Tag {

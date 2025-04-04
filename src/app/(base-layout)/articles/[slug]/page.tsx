@@ -3,6 +3,7 @@ import { graphql } from '@/lib/datocms/graphql';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { StructuredText } from 'react-datocms';
+export const dynamic = 'force-dynamic';
 
 const categoryQuery = graphql(
   `
