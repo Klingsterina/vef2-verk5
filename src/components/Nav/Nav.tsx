@@ -47,16 +47,16 @@ export default async function Nav() {
 
   return (
     <>
-    <div className={styles.nav}>
-        <h3 style={{marginBottom: '0.5rem', marginLeft: '10px'} }>Frétta flokkar:</h3>
-      <ul>
-        {allArticlecategories.map((category) => (
-          <li key={category.slug}>
-            <Link href={`/articles/${category.slug}`}>{category.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className={styles.nav}>
+        <h3 style={{ marginBottom: '0.5rem', marginLeft: '10px' }}>Frétta flokkar:</h3>
+        <ul>
+          {allArticlecategories.map((category) => (
+            <li key={category.slug}>
+              <Link href={`/articles/${category.slug}`}>{category.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

@@ -1,52 +1,52 @@
 .nav {
-    padding: 18px 60px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    max-width: fit-content;
+  padding: 18px 60px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  max-width: fit-content;
 }
 
 .nav ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav ul li a {
-    text-decoration: none;
-    color: #000;
-    font-size: 19px;
-    font-weight: 500;
-    transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  color: #000;
+  font-size: 19px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
 }
 
 .nav ul li {
-    list-style: none;
-    position: relative;
-    margin: 0px 10px;
-    padding: 0px 2px;
-    color: #000;
-    font-size: 19px;
+  list-style: none;
+  position: relative;
+  margin: 0px 10px;
+  padding: 0px 2px;
+  color: #000;
+  font-size: 19px;
 }
 
 .nav ul li::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    margin-bottom: -2px;
-    background: linear-gradient(to right, #000000, #65d555);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.4s ease-in-out;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  margin-bottom: -2px;
+  background: linear-gradient(to right, #000000, #65d555);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-in-out;
 }
 
 .nav ul li:hover::before {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .nav ul li:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

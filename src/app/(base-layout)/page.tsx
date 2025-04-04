@@ -1,6 +1,6 @@
-import { executeQuery } from "@/lib/datocms/executeQuery";
-import { graphql } from "@/lib/datocms/graphql";
-import Link from "next/link";
+import { executeQuery } from '@/lib/datocms/executeQuery';
+import { graphql } from '@/lib/datocms/graphql';
+import Link from 'next/link';
 export const dynamic = 'force-dynamic';
 
 const allArticlesQuery = graphql(
@@ -52,15 +52,15 @@ export default async function HomePage() {
             </h2>
             <p>{article.headline}</p>
             {article.picture && (
-              <Link href={`/article/${article.id}`}><img
-                src={article.picture.url}
-                alt={article.picture.alt || ""}
-                style={{ maxWidth: "300px" }}
-              /></Link>
+              <Link href={`/article/${article.id}`}>
+                <img
+                  src={article.picture.url}
+                  alt={article.picture.alt || ''}
+                  style={{ maxWidth: '300px' }}
+                />
+              </Link>
             )}
-            <p>
-              Höfundur: {article.authors.map((a) => a.name).join(", ") || "óþekktur"}
-            </p>
+            <p>Höfundur: {article.authors.map((a) => a.name).join(', ') || 'óþekktur'}</p>
           </li>
         ))}
       </ul>

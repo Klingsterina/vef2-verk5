@@ -38,7 +38,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header>
-          <Link href={`/`}><h1>Verkefni 5</h1></Link>
+          <Link href={`/`}>
+            <h1>Verkefni 5</h1>
+          </Link>
           <Nav />
         </header>
         <main>{children}</main>

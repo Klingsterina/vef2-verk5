@@ -3,7 +3,6 @@ import { executeQuery } from '@/lib/datocms/executeQuery';
 import { StructuredText } from 'react-datocms';
 export const dynamic = 'force-dynamic';
 
-
 type Props = {
   params: {
     id: string;
@@ -64,12 +63,7 @@ export default async function Article({ params }: Props) {
 
       <h3>{article.headline}</h3>
 
-      {article.picture && (
-        <img
-          src={article.picture.url}
-          alt={article.picture.alt || ''}
-        />
-      )}
+      {article.picture && <img src={article.picture.url} alt={article.picture.alt || ''} />}
 
       <StructuredText data={article.body} />
 
