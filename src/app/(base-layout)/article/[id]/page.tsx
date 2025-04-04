@@ -1,6 +1,6 @@
-import { graphql } from "@/lib/datocms/graphql";
-import { executeQuery } from "@/lib/datocms/executeQuery";
-import { StructuredText } from "react-datocms";
+import { graphql } from '@/lib/datocms/graphql';
+import { executeQuery } from '@/lib/datocms/executeQuery';
+import { StructuredText } from 'react-datocms';
 
 type Props = {
   params: {
@@ -65,14 +65,14 @@ export default async function Article({ params }: Props) {
       {article.picture && (
         <img
           src={article.picture.url}
-          alt={article.picture.alt || ""}
-          style={{ maxWidth: "300px", marginTop: "10px" }}
+          alt={article.picture.alt || ''}
+          style={{ maxWidth: '300px', marginTop: '10px' }}
         />
       )}
 
       <StructuredText data={article.body} />
 
-      <p>Höfundur: {article.authors.map((a) => a.name).join(", ")  || 'óþekktan höfund'}</p>
+      <p>Höfundur: {article.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}</p>
     </div>
   );
 }

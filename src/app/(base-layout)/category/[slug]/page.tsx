@@ -84,14 +84,14 @@ export default async function CategoryPage({ params }: Props) {
       <ul>
         {allArticles.map((q) => (
           <li key={q.id}>
-          {q.picture && (
-            <img
-              src={q.picture.url}
-              alt={q.picture.alt || ''}
-              style={{ maxWidth: '300px', marginTop: '10px' }}
-            />
-          )}
-          <Link href={`/article/${q.id}`}>{q.articleTitle}</Link> eftir{' '}
+            {q.picture && (
+              <img
+                src={q.picture.url}
+                alt={q.picture.alt || ''}
+                style={{ maxWidth: '300px', marginTop: '10px' }}
+              />
+            )}
+            <Link href={`/article/${q.id}`}>{q.articleTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
             <div>
               <StructuredText data={q.body} />
