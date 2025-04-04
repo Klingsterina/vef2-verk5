@@ -9,6 +9,7 @@ import '../Styles/globals.scss';
 import './global.css';
 import Nav from '@/components/Nav/Nav';
 import Link from 'next/link';
+import Footer from '@/components/footer/Footer';
 
 const query = graphql(
   /* GraphQL */ `
@@ -44,6 +45,7 @@ export default function RootLayout({
           <Nav />
         </header>
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

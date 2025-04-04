@@ -1,7 +1,7 @@
 import { executeQuery } from '@/lib/datocms/executeQuery';
 import { graphql } from '@/lib/datocms/graphql';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic';
+import styles from '../../Styles/page.module.scss';
 
 const allArticlesQuery = graphql(
   `
@@ -43,7 +43,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <h1>Nýjustu fréttir</h1>
+      <h1 className={styles.h1}>Nýjustu fréttir</h1>
       <ul>
         {allArticles.map((article) => (
           <li key={article.id}>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { StructuredText } from 'react-datocms';
 export const dynamic = 'force-dynamic';
+import styles from '../../../../Styles/page.module.scss';
 
 const categoryQuery = graphql(
   `
@@ -81,7 +82,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      <h1>Fréttir í flokki: {articlecategory.title}</h1>
+      <h1 className={styles.h1}>Fréttir í flokki: {articlecategory.title}</h1>
       <ul>
         {allArticles.map((q) => (
           <li key={q.id}>
@@ -94,9 +95,7 @@ export default async function CategoryPage({ params }: Props) {
             )}
             <Link href={`/article/${q.id}`}>{q.articleTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
-            <div>
               <StructuredText data={q.body} />
-            </div>
           </li>
         ))}
       </ul>
