@@ -7,7 +7,7 @@ import { StructuredText } from 'react-datocms';
 const categoryQuery = graphql(
   `
     query GetCategoryBySlug($slug: String) {
-      questioncategory(filter: { slug: { eq: $slug } }) {
+      articlecategory(filter: { slug: { eq: $slug } }) {
         id
         title
       }
@@ -16,14 +16,19 @@ const categoryQuery = graphql(
   [],
 );
 
-const questionsQuery = graphql(
+const articlesQuery = graphql(
   `
-    query GetQuestionsByCategoryId($id: ItemId) {
-      allQuestions(filter: { flokkur: { eq: $id } }) {
+    query GetArticlesByCategoryId($id: ItemId) {
+      allArticles(filter: { flokkur: { eq: $id } }) {
         id
-        questionTitle
+        articleTitle
         body {
           value
+        }
+        picture {
+          url
+          alt
+          title
         }
         authors {
           name
@@ -40,39 +45,53 @@ type Props = {
   };
 };
 
-type Question = {
+type Article = {
   id: string;
-  questionTitle: string;
+  articleTitle: string;
   body: { value: any };
+  picture: {
+    url: string;
+    alt: string;
+    title: string;
+  } | null;
   authors: { name: string }[];
 };
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = params;
 
-  const { questioncategory } = (await executeQuery(categoryQuery, {
+  const { articlecategory } = (await executeQuery(categoryQuery, {
     variables: { slug },
   })) as {
-    questioncategory: { id: string; title: string } | null;
+    articlecategory: { id: string; title: string } | null;
   };
 
-  if (!questioncategory) {
+  if (!articlecategory) {
     notFound();
   }
 
-  const { allQuestions } = (await executeQuery(questionsQuery, {
-    variables: { id: questioncategory.id },
+  const { allArticles } = (await executeQuery(articlesQuery, {
+    variables: { id: articlecategory.id },
   })) as {
-    allQuestions: Question[];
+    allArticles: Article[];
   };
+
+  console.log(allArticles);
 
   return (
     <>
-      <h1>Fréttir í flokki: {questioncategory.title}</h1>
+      <h1>Fréttir í flokki: {articlecategory.title}</h1>
       <ul>
-        {allQuestions.map((q) => (
+        {allArticles.map((q) => (
           <li key={q.id}>
-            <Link href={`/questions/${q.id}`}>{q.questionTitle}</Link> eftir{' '}
+          {q.picture && (
+            <img
+              src={q.picture.url}
+              alt={q.picture.alt || ''}
+              style={{ maxWidth: '300px', marginTop: '10px' }}
+            />
+          )}
+          <Link href={`/article/${q.id}`}>{q.articleTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
             <div>
               <StructuredText data={q.body} />

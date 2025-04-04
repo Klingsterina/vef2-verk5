@@ -7,8 +7,8 @@ import { notFound } from 'next/navigation';
 
 const query = graphql(
   `
-    query Categories {
-      allQuestioncategories {
+    query GetCategories {
+      allArticlecategories {
         title
         slug
       }
@@ -17,13 +17,13 @@ const query = graphql(
   [],
 );
 
-type QuestionCategory = {
+type ArticleCategory = {
   title: string;
   slug: string;
 };
 
 type QueryResult = {
-  allQuestioncategories: QuestionCategory[];
+  allArticlecategories: ArticleCategory[];
 };
 
 export const generateMetadata = generateMetadataFn({
@@ -34,19 +34,21 @@ export const generateMetadata = generateMetadataFn({
 export default async function Page() {
   const { isEnabled: isDraftModeEnabled } = draftMode();
 
-  const { allQuestioncategories } = (await executeQuery(query, {
+  const { allArticlecategories } = (await executeQuery(query, {
     includeDrafts: isDraftModeEnabled,
   })) as QueryResult;
 
-  if (!allQuestioncategories || allQuestioncategories.length === 0) {
+  if (!allArticlecategories || allArticlecategories.length === 0) {
     notFound();
   }
+
+  console.log('allArticlecategories', allArticlecategories);
 
   return (
     <>
       <h1>Flokkar</h1>
       <ul>
-        {allQuestioncategories.map((category) => (
+        {allArticlecategories.map((category) => (
           <li key={category.slug}>
             <Link href={`/category/${category.slug}`}>{category.title}</Link>
           </li>
