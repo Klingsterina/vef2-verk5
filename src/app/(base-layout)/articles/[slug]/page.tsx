@@ -95,7 +95,7 @@ export default async function CategoryPage({ params }: Props) {
             )}
             <Link href={`/article/${q.id}`}>{q.articleTitle}</Link> eftir{' '}
             {q.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}
-              <StructuredText data={q.body} />
+            <StructuredText data={q.body} />
           </li>
         ))}
       </ul>
