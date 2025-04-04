@@ -97,7 +97,7 @@ export default async function Article({ params }: Props) {
       </div>
 
       <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-        Höfund{article.authors.length > 1 ? 'ar' : ''}:
+        Höfund{article.authors.length > 1 ? 'ar' : 'ur'}:
       </p>
       <div className={styles.authorContainer}>
         {article.authors && article.authors.length > 0 ? (
