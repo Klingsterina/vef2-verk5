@@ -2,6 +2,8 @@ import { graphql } from '@/lib/datocms/graphql';
 import { executeQuery } from '@/lib/datocms/executeQuery';
 import { StructuredText } from 'react-datocms';
 export const dynamic = 'force-dynamic';
+import styles from '../../../../Styles/page.module.scss';
+import Avatar from '@/components/avatar/Avatar';
 
 type Props = {
   params: {
@@ -19,7 +21,11 @@ type Article = {
     alt: string;
     title: string;
   } | null;
-  authors: { name: string }[];
+  authors: {
+    name: string; 
+    picture: { url: string };
+  }[];
+  _createdAt: string;
 };
 
 const articleQuery = graphql(
@@ -39,7 +45,11 @@ const articleQuery = graphql(
         }
         authors {
           name
+          picture {
+            url
+          }
         }
+        _createdAt
       }
     }
   `,
@@ -58,16 +68,41 @@ export default async function Article({ params }: Props) {
   }
 
   return (
-    <div>
-      <h1>{article.articleTitle}</h1>
+    <div className={styles.article}>
+      <div className={styles.articleContent}>
+        <h1 style={{fontSize: '3rem'}}>{article.articleTitle}</h1>
 
-      <h3>{article.headline}</h3>
+        <h3>{article.headline}</h3>
 
-      {article.picture && <img src={article.picture.url} alt={article.picture.alt || ''} />}
+        {article.picture && <img className={styles.articleImage} src={article.picture.url} alt={article.picture.alt || ''} />}
 
-      <StructuredText data={article.body} />
+        <StructuredText data={article.body} />
 
-      <p>Höfundur: {article.authors.map((a) => a.name).join(', ') || 'óþekktan höfund'}</p>
+        <div className={styles.articleText}>
+          <p style={{fontWeight: 'bold', fontSize: '1.5rem'}}>Published:</p>
+          <p>
+            {new Date(article._createdAt).toLocaleDateString('is-IS', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        </div>
+      </div>
+
+      <p style={{fontSize: '1.5rem', fontWeight: 'bold'}}>Höfund{article.authors.length > 1 ? 'ar' : ''}:</p>
+      <div className={styles.authorContainer}>
+              {article.authors && article.authors.length > 0 ? (
+                article.authors.map((author, i) => (
+                  <div className={styles.author}>
+                    <Avatar name={author.name} picture={author.picture} />
+                    <p>{author.name}</p>
+                  </div>
+                ))
+              ) : (
+                <p>Höfundur: óþekktur</p>
+              )}
+            </div>
     </div>
   );
 }

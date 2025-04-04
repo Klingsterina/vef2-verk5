@@ -1,0 +1,28 @@
+.imageContainer {
+    border-radius: 9999px; // or use Tailwind: rounded-full
+  }
+  
+.image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 9999px;
+  }
+
+.authorContainer {
+  display: flex;
+  flex-direction: column;
+  gap : 0.5rem;
+}
+
+.author {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.author p {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #333;
+}
